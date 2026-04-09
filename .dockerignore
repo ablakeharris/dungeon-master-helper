@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[oc]
+chroma_data/
+.env
+.git/
+.gitignore
+.dockerignore
+.python-version
+.tool-versions
+README.md
