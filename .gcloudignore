@@ -1,0 +1,15 @@
+.git/
+.gitignore
+.dockerignore
+.gcloudignore
+.venv/
+__pycache__/
+*.py[oc]
+chroma_data/
+.env
+.python-version
+.tool-versions
+README.md
+scripts/deploy.sh
+scripts/setup-iap.sh
+scripts/add-iap-user.sh

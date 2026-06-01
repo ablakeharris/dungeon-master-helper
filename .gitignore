@@ -10,7 +10,10 @@ wheels/
 .venv
 
 # Environment variables
-# .env
+.env
 
 # ChromaDB local data
 chroma_data/
+
+# ADK local session state
+.adk/
