@@ -35,9 +35,9 @@ Launch the ADK web UI:
 uv run adk web .
 ```
 
-## Deploy to Cloud Run behind IAP
+## Deploy to Cloud Run (private)
 
-The app is deployed to Cloud Run with Identity-Aware Proxy enabled directly on the service, so only allowlisted Google accounts can reach it. There is no load balancer, custom domain, or manually-created OAuth client — IAP manages its own OAuth client.
+The app is deployed to Cloud Run with public access disabled (`--no-allow-unauthenticated`). Instead of exposing a public endpoint, you reach the running service through an authenticated local proxy that signs each request with your own `gcloud` identity. Only identities granted `roles/run.invoker` can reach the service, so it stays private without any load balancer, custom domain, or OAuth setup.
 
 ### 1. Deploy the Cloud Run service
 
@@ -45,25 +45,31 @@ The app is deployed to Cloud Run with Identity-Aware Proxy enabled directly on t
 scripts/deploy.sh
 ```
 
-This enables the needed APIs, grants the build service account access to Vertex AI (for doc ingestion at build time), builds the image, and deploys the service with public access disabled.
+This enables the needed APIs, grants the build service account access to Vertex AI (for doc ingestion at build time), builds the image, deploys the service with public access disabled, and grants the deploying account `run.invoker` so it can use the proxy.
 
-### 2. Enable IAP and allowlist your account
-
-```bash
-ALLOWLIST_USER=you@example.com scripts/setup-iap.sh
-```
-
-The script is idempotent — re-run it freely. It enables IAP on the service, grants the IAP service agent permission to invoke Cloud Run, allowlists `ALLOWLIST_USER`, and prints the service URL to sign in at.
-
-### 3. Add more users later
+### 2. Run it locally through the proxy
 
 ```bash
-scripts/add-iap-user.sh someone@example.com
+scripts/run-local.sh
 ```
 
-### OAuth consent screen (first-time, if sign-in is blocked)
+This starts `gcloud run services proxy` (installing the `cloud-run-proxy` component on first run) and forwards `localhost:8088` to the service. Open:
 
-For a personal (non-Workspace) project, the first sign-in may be blocked until the OAuth consent screen is configured once. If that happens, open the [OAuth consent screen](https://console.cloud.google.com/apis/credentials/consent), pick **External**, fill in app name and support/developer email, save, leave it in **Testing** mode, and add each allowlisted account as a **Test user**.
+> http://localhost:8088/dev-ui/
+
+Leave the proxy running while you use the app.
+
+### Granting access to another person
+
+Anyone who needs access runs the proxy from their own machine after you grant their account `run.invoker`:
+
+```bash
+gcloud run services add-iam-policy-binding dnd-waterdeep \
+  --region=us-central1 --project=dnd-waterdeep-492623 \
+  --member="user:someone@example.com" --role="roles/run.invoker"
+```
+
+They need the `gcloud` CLI and access to the project. The service is never exposed publicly.
 
 ### Environment variables
 
@@ -74,6 +80,6 @@ The scripts default to:
 | `PROJECT` | `dnd-waterdeep-492623` |
 | `REGION` | `us-central1` |
 | `SERVICE` | `dnd-waterdeep` |
-| `ALLOWLIST_USER` | _required_ — the Google account allowed through IAP |
+| `PORT` | `8088` (local proxy port, `run-local.sh` only) |
 
-Override them inline to deploy to a different project/region.
+Override them inline to target a different project/region/port.

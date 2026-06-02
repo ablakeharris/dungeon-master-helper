@@ -41,5 +41,16 @@ gcloud run deploy "$SERVICE" \
   --timeout=3600 \
   --set-env-vars="GOOGLE_CLOUD_PROJECT=${PROJECT},GOOGLE_CLOUD_LOCATION=${REGION},GOOGLE_GENAI_USE_VERTEXAI=TRUE"
 
+# The service is private (--no-allow-unauthenticated). Access is via an
+# authenticated local proxy (scripts/run-local.sh), so the deploying account
+# needs run.invoker. Granting it here keeps the service private while letting
+# you reach it immediately.
+ACTIVE_ACCOUNT="$(gcloud config get-value account 2>/dev/null)"
+gcloud run services add-iam-policy-binding "$SERVICE" \
+  --region="$REGION" \
+  --project="$PROJECT" \
+  --member="user:${ACTIVE_ACCOUNT}" \
+  --role="roles/run.invoker" >/dev/null
+
 echo
-echo "Deployed. Next: run scripts/setup-iap.sh to put the service behind IAP."
+echo "Deployed (private). Next: run scripts/run-local.sh and open http://localhost:8088/dev-ui/"
