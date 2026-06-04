@@ -41,15 +41,28 @@ async def run() -> None:
             role="user", parts=[types.Part(text=user_input)]
         )
         response_text = ""
-        async for event in runner.run_async(
-            user_id=USER_ID, session_id=session.id, new_message=content
-        ):
-            if event.content and event.content.parts:
-                for part in event.content.parts:
-                    if part.text:
-                        response_text += part.text
+        try:
+            async for event in runner.run_async(
+                user_id=USER_ID, session_id=session.id, new_message=content
+            ):
+                print(f"DEBUG: Event = {event}")
+                print(f"DEBUG: Event type = {type(event)}")
+                if event and hasattr(event, 'content'):
+                    print(f"DEBUG: Event content = {event.content}")
+                    if event.content and event.content.parts:
+                        for part in event.content.parts:
+                            print(f"DEBUG: Part = {part}, type = {type(part)}")
+                            if hasattr(part, 'text') and part.text:
+                                response_text += part.text
+        except Exception as e:
+            print(f"ERROR: {e}")
+            import traceback
+            traceback.print_exc()
 
-        print(f"\nDM: {response_text}\n")
+        if response_text:
+            print(f"\nDM: {response_text}\n")
+        else:
+            print(f"\nDM: (no response)\n")
 
 
 def main() -> None:

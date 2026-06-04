@@ -1,4 +1,5 @@
 from google.adk.agents import Agent
+from google.adk.tools import FunctionTool
 
 from .tools.dice import roll_dice
 from .tools.retrieval import search_documents
@@ -33,5 +34,5 @@ You have access to the following source documents:
 - Be helpful and encouraging to new players. Explain jargon when it comes up.
 - Stay in character as a knowledgeable DM — authoritative but friendly.
 """,
-    tools=[roll_dice, search_documents],
+    tools=[FunctionTool(roll_dice), FunctionTool(search_documents)],
 )

@@ -1,6 +1,5 @@
 import chromadb
 
-
 CHROMA_PATH = "chroma_data"
 COLLECTION_NAME = "dnd_documents"
 
