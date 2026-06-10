@@ -1,6 +1,6 @@
 import chromadb
 
-CHROMA_PATH = "chroma_data"
+CHROMA_PATH = "dnd_agent/chroma_data"
 COLLECTION_NAME = "dnd_documents"
 
 
@@ -29,7 +29,7 @@ def search_documents(query: str, n_results: int = 5) -> dict:
     except Exception:
         return {
             "error": "Knowledge base not found. Run the ingestion script first: "
-            "python scripts/ingest_docs.py"
+            "python dnd_agent/scripts/ingest_docs.py"
         }
 
     results = collection.query(query_texts=[query], n_results=n_results)
@@ -37,10 +37,13 @@ def search_documents(query: str, n_results: int = 5) -> dict:
     documents = []
     for i, doc in enumerate(results["documents"][0]):
         metadata = results["metadatas"][0][i] if results["metadatas"] else {}
-        documents.append({
+        entry = {
             "content": doc,
             "source": metadata.get("source", "unknown"),
-            "page": metadata.get("page", None),
-        })
+        }
+        page = metadata.get("page")
+        if page is not None:
+            entry["page"] = page
+        documents.append(entry)
 
     return {"query": query, "results": documents}
