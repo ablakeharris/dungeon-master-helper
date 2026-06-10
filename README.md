@@ -42,7 +42,7 @@ The app is deployed to Cloud Run with public access disabled (`--no-allow-unauth
 ### 1. Deploy the Cloud Run service
 
 ```bash
-scripts/deploy.sh
+dnd_agent/scripts/deploy.sh
 ```
 
 This enables the needed APIs, grants the build service account access to Vertex AI (for doc ingestion at build time), builds the image, deploys the service with public access disabled, and grants the deploying account `run.invoker` so it can use the proxy.
@@ -50,7 +50,7 @@ This enables the needed APIs, grants the build service account access to Vertex 
 ### 2. Run it locally through the proxy
 
 ```bash
-scripts/run-local.sh
+dnd_agent/scripts/run-local.sh
 ```
 
 This starts `gcloud run services proxy` (installing the `cloud-run-proxy` component on first run) and forwards `localhost:8088` to the service. Open:

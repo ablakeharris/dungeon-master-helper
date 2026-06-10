@@ -5,11 +5,10 @@
 .venv/
 __pycache__/
 *.py[oc]
-chroma_data/
 .env
 .python-version
 .tool-versions
 README.md
-scripts/deploy.sh
-scripts/setup-iap.sh
-scripts/add-iap-user.sh
+dnd_agent/scripts/deploy.sh
+dnd_agent/scripts/run-local.sh
+dnd_agent/chroma_data/
