@@ -13,7 +13,9 @@ def roll_dice(notation: str) -> dict:
     """
     match = re.fullmatch(r"(\d+)d(\d+)([+-]\d+)?", notation.strip().lower())
     if not match:
-        return {"error": f"Invalid dice notation: '{notation}'. Use format like '2d6' or '1d20+5'."}
+        return {
+            "error": f"Invalid dice notation: '{notation}'. Use format like '2d6' or '1d20+5'."
+        }
 
     count = int(match.group(1))
     sides = int(match.group(2))

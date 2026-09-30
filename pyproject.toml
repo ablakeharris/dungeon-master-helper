@@ -10,4 +10,10 @@ dependencies = [
     "chromadb>=1.0.0",
     "pypdf>=6.9.2",
     "python-dotenv>=1.2.2",
+    "datamodel-code-generator>=0.83.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.16.9",
 ]

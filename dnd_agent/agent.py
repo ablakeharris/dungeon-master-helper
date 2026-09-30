@@ -1,6 +1,7 @@
 from google.adk.agents import Agent
 from google.adk.tools import FunctionTool
 
+from .sub_agents.character_creator_agent import character_creator_agent
 from .tools.dice import roll_dice
 from .tools.retrieval import search_documents
 
@@ -39,4 +40,5 @@ You have access to the following source documents:
 - Be mindful of a new Dungeon Master using you and explain Dungeon Master concepts thoroughly.
 """,
     tools=[FunctionTool(roll_dice), FunctionTool(search_documents)],
+    sub_agents=[character_creator_agent],
 )

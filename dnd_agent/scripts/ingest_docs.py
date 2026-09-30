@@ -105,7 +105,9 @@ def ingest(docs_dir: str, chunk_size: int, chunk_overlap: int) -> None:
 
     files = [f for f in docs_path.iterdir() if f.suffix.lower() in READERS]
     if not files:
-        print(f"No supported files found in '{docs_dir}'. Add .txt, .md, or .pdf files.")
+        print(
+            f"No supported files found in '{docs_dir}'. Add .txt, .md, or .pdf files."
+        )
         return
 
     print(f"Found {len(files)} document(s) in '{docs_dir}'")
@@ -137,14 +139,18 @@ def ingest(docs_dir: str, chunk_size: int, chunk_overlap: int) -> None:
                 continue
             for page_num, page_text in pages:
                 for chunk in chunk_text(page_text, chunk_size, chunk_overlap):
-                    chunk_id = hashlib.md5(f"{file_path.name}:{chunk_index}".encode()).hexdigest()
+                    chunk_id = hashlib.md5(
+                        f"{file_path.name}:{chunk_index}".encode()
+                    ).hexdigest()
                     ids.append(chunk_id)
                     documents.append(chunk)
-                    metadatas.append({
-                        "source": file_path.name,
-                        "chunk_index": chunk_index,
-                        "page": page_num,
-                    })
+                    metadatas.append(
+                        {
+                            "source": file_path.name,
+                            "chunk_index": chunk_index,
+                            "page": page_num,
+                        }
+                    )
                     chunk_index += 1
         else:
             reader = READERS[file_path.suffix.lower()]
@@ -152,28 +158,46 @@ def ingest(docs_dir: str, chunk_size: int, chunk_overlap: int) -> None:
             if not text:
                 continue
             for chunk in chunk_text(text, chunk_size, chunk_overlap):
-                chunk_id = hashlib.md5(f"{file_path.name}:{chunk_index}".encode()).hexdigest()
+                chunk_id = hashlib.md5(
+                    f"{file_path.name}:{chunk_index}".encode()
+                ).hexdigest()
                 ids.append(chunk_id)
                 documents.append(chunk)
-                metadatas.append({
-                    "source": file_path.name,
-                    "chunk_index": chunk_index,
-                })
+                metadatas.append(
+                    {
+                        "source": file_path.name,
+                        "chunk_index": chunk_index,
+                    }
+                )
                 chunk_index += 1
 
         print(f"    -> {chunk_index} chunk(s)")
         collection.add(ids=ids, documents=documents, metadatas=metadatas)
         total_chunks += chunk_index
 
-    print(f"\nDone! Ingested {total_chunks} chunks from {len(files)} file(s) into '{COLLECTION_NAME}'.")
+    print(
+        f"\nDone! Ingested {total_chunks} chunks from {len(files)} file(s) into '{COLLECTION_NAME}'."
+    )
     print(f"ChromaDB data stored at: {os.path.abspath(CHROMA_PATH)}")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Ingest D&D documents into ChromaDB")
-    parser.add_argument("--docs-dir", default="dnd_agent/docs", help="Directory containing documents")
-    parser.add_argument("--chunk-size", type=int, default=DEFAULT_CHUNK_SIZE, help="Chunk size in characters")
-    parser.add_argument("--chunk-overlap", type=int, default=DEFAULT_CHUNK_OVERLAP, help="Overlap between chunks")
+    parser.add_argument(
+        "--docs-dir", default="dnd_agent/docs", help="Directory containing documents"
+    )
+    parser.add_argument(
+        "--chunk-size",
+        type=int,
+        default=DEFAULT_CHUNK_SIZE,
+        help="Chunk size in characters",
+    )
+    parser.add_argument(
+        "--chunk-overlap",
+        type=int,
+        default=DEFAULT_CHUNK_OVERLAP,
+        help="Overlap between chunks",
+    )
     args = parser.parse_args()
     ingest(args.docs_dir, args.chunk_size, args.chunk_overlap)
 

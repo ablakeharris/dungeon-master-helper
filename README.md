@@ -17,6 +17,16 @@ Install dependencies:
 uv sync
 ```
 
+## Generate Pydantic Models
+
+After installing dependencies, generate Pydantic models from all JSON Schemas in `dnd5e_json_schema/schemas/`:
+
+```bash
+uv run python dnd_agent/scripts/generate_pydantic_models.py
+```
+
+The generated models are written to `dnd_agent/generated_models/`. Rerun the command after changing the source schemas.
+
 ## Ingest Documents
 
 Place your D&D source documents (`.txt`, `.md`, or `.pdf`) in the `docs/` directory, then run:
@@ -75,11 +85,11 @@ They need the `gcloud` CLI and access to the project. The service is never expos
 
 The scripts default to:
 
-| Var | Default |
-| --- | --- |
-| `PROJECT` | `dnd-waterdeep-492623` |
-| `REGION` | `us-central1` |
-| `SERVICE` | `dnd-waterdeep` |
-| `PORT` | `8088` (local proxy port, `run-local.sh` only) |
+| Var       | Default                                        |
+| --------- | ---------------------------------------------- |
+| `PROJECT` | `dnd-waterdeep-492623`                         |
+| `REGION`  | `us-central1`                                  |
+| `SERVICE` | `dnd-waterdeep`                                |
+| `PORT`    | `8088` (local proxy port, `run-local.sh` only) |
 
 Override them inline to target a different project/region/port.
