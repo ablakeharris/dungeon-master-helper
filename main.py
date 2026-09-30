@@ -9,6 +9,7 @@ load_dotenv()
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types
+from google.genai.errors import APIError
 
 from dnd_agent import root_agent
 
@@ -50,7 +51,7 @@ async def run() -> None:
                             print(f"DEBUG: Part = {part}, type = {type(part)}")
                             if hasattr(part, "text") and part.text:
                                 response_text += part.text
-        except Exception as e:
+        except APIError as e:
             print(f"ERROR: {e}")
             import traceback
 

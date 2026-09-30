@@ -6,7 +6,7 @@ from .tools.dice import roll_dice
 from .tools.retrieval import search_documents
 
 root_agent = Agent(
-    model="gemini-2.5-flash",
+    model="gemini-3.5-flash",
     name="dnd_master",
     description="D&D 5e rules expert and Dungeon Master assistant",
     instruction="""You are an expert Dungeon Master and rules authority for Dungeons & Dragons

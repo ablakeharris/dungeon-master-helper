@@ -12,7 +12,7 @@ from .item_schema import JsonSchemaForDD5EPhysicalItem
 class Damage(BaseModel):
     dice: dice_schema.JsonSchemaForDice | None = None
     type: damage_type_schema.JsonSchemaForDD5EDamageType | None = Field(
-        'none', validate_default=True
+        "none", validate_default=True
     )
 
 
@@ -31,23 +31,23 @@ class ThrowRange(BaseModel):
 
 
 class Properties(BaseModel):
-    Ammunition: str | None = ''
-    Finesse: bool | None = 'false'
-    Heavy: bool | None = 'false'
-    Light: bool | None = 'false'
-    Loading: bool | None = 'false'
-    Monk: bool | None = 'false'
-    Reach: bool | None = 'false'
-    Thrown: bool | None = 'false'
-    TwoHanded: bool | None = 'false'
-    Versatile: bool | None = 'false'
+    Ammunition: str | None = ""
+    Finesse: bool | None = "false"
+    Heavy: bool | None = "false"
+    Light: bool | None = "false"
+    Loading: bool | None = "false"
+    Monk: bool | None = "false"
+    Reach: bool | None = "false"
+    Thrown: bool | None = "false"
+    TwoHanded: bool | None = "false"
+    Versatile: bool | None = "false"
 
 
 class JsonSchemaForDD5EWeapon(JsonSchemaForDD5EPhysicalItem):
-    category: str | None = ''
+    category: str | None = ""
     damage: Damage
     versatile_damage: VersatileDamage | None = None
     range: Range | None = None
     throw_range: ThrowRange | None = None
     properties: Properties | None = None
-    equipped: bool | None = 'false'
+    equipped: bool | None = "false"

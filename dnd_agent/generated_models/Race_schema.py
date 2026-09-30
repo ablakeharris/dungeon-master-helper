@@ -11,21 +11,21 @@ from . import action_schema, feature_schema, senses_schema, source_schema
 
 
 class Size(StrEnum):
-    Tiny = 'Tiny'
-    Small = 'Small'
-    Medium = 'Medium'
-    Large = 'Large'
-    Huge = 'Huge'
-    Gargantuan = 'Gargantuan'
+    Tiny = "Tiny"
+    Small = "Small"
+    Medium = "Medium"
+    Large = "Large"
+    Huge = "Huge"
+    Gargantuan = "Gargantuan"
 
 
 class DD5ERace(BaseModel):
-    name: str = Field(..., examples=['Dragonborn'])
-    subtype: str | None = Field(None, examples=['Silver'])
-    size: Size | None = 'Medium'
+    name: str = Field(..., examples=["Dragonborn"])
+    subtype: str | None = Field(None, examples=["Silver"])
+    size: Size | None = "Medium"
     traits: list[feature_schema.JsonSchemaForDD5EFeature] | None = None
     actions: list[action_schema.JsonSchemaForDD5ECreatureAction] | None = Field(
-        None, description='Special actions gained by race/race-subtype.'
+        None, description="Special actions gained by race/race-subtype."
     )
     senses: senses_schema.JsonSchemaForDD5ESenses | None = None
     source: source_schema.Model | None = None

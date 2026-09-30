@@ -12,37 +12,37 @@ from .Creature_schema import DD5ECreature
 
 
 class Size(StrEnum):
-    Tiny = 'Tiny'
-    Small = 'Small'
-    Medium = 'Medium'
-    Large = 'Large'
-    Huge = 'Huge'
-    Gargantuan = 'Gargantuan'
+    Tiny = "Tiny"
+    Small = "Small"
+    Medium = "Medium"
+    Large = "Large"
+    Huge = "Huge"
+    Gargantuan = "Gargantuan"
 
 
 class Type(StrEnum):
-    Aberration = 'Aberration'
-    Beast = 'Beast'
-    Celestial = 'Celestial'
-    Construct = 'Construct'
-    Dragon = 'Dragon'
-    Elemental = 'Elemental'
-    Fey = 'Fey'
-    Fiend = 'Fiend'
-    Giant = 'Giant'
-    Humanoid = 'Humanoid'
-    Monstrosity = 'Monstrosity'
-    Ooze = 'Ooze'
-    Plant = 'Plant'
-    Undead = 'Undead'
-    Swarm_of_Tiny_beasts = 'Swarm of Tiny beasts'
+    Aberration = "Aberration"
+    Beast = "Beast"
+    Celestial = "Celestial"
+    Construct = "Construct"
+    Dragon = "Dragon"
+    Elemental = "Elemental"
+    Fey = "Fey"
+    Fiend = "Fiend"
+    Giant = "Giant"
+    Humanoid = "Humanoid"
+    Monstrosity = "Monstrosity"
+    Ooze = "Ooze"
+    Plant = "Plant"
+    Undead = "Undead"
+    Swarm_of_Tiny_beasts = "Swarm of Tiny beasts"
 
 
 class JsonSchemaForDD5EMonster(DD5ECreature):
     size: Size
     challenge_rating: float | None = Field(None, examples=[0.125, 0.25, 0.5, 1, 2])
     type: Type
-    subtype: str = Field(..., examples=['Goblinoid'])
+    subtype: str = Field(..., examples=["Goblinoid"])
     traits: list[feature_schema.JsonSchemaForDD5EFeature] | None = None
     actions: list[action_schema.JsonSchemaForDD5ECreatureAction] | None = None
     tags: tag_schema.Model | None = None

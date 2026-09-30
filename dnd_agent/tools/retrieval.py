@@ -1,4 +1,5 @@
 import chromadb
+from chromadb.errors import NotFoundError
 
 CHROMA_PATH = "dnd_agent/chroma_data"
 COLLECTION_NAME = "dnd_documents"
@@ -26,7 +27,7 @@ def search_documents(query: str, n_results: int = 5) -> dict:
 
     try:
         collection = _get_collection()
-    except Exception:
+    except NotFoundError:
         return {
             "error": "Knowledge base not found. Run the ingestion script first: "
             "python dnd_agent/scripts/ingest_docs.py"

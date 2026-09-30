@@ -8,17 +8,17 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class JsonSchemaForDD5ESenses(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra="forbid",
     )
     Blindsight: bool | str | None = Field(
-        False, description='`false` or provide Blindsight trait text.'
+        False, description="`false` or provide Blindsight trait text."
     )
     Darkvision: bool | str | None = Field(
-        False, description='`false` or provide Darkvision trait text.'
+        False, description="`false` or provide Darkvision trait text."
     )
     Tremorsense: bool | str | None = Field(
-        False, description='`false` or provide Tremorsense trait text.'
+        False, description="`false` or provide Tremorsense trait text."
     )
     Truesight: bool | str | None = Field(
-        False, description='`false` or provide Truesight trait text.'
+        False, description="`false` or provide Truesight trait text."
     )

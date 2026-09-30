@@ -17,77 +17,77 @@ from . import (
 
 class Speed(BaseModel):
     Walk: int | None = 0
-    Burrow: int | bool | None = 'false'
+    Burrow: int | bool | None = "false"
     Climb: int | bool | None = 0
-    Fly: int | bool | None = 'false'
-    Hover: bool | None = 'false'
+    Fly: int | bool | None = "false"
+    Hover: bool | None = "false"
     Swim: int | bool | None = 0
 
 
 class Skills(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra="forbid",
     )
-    Athletics: bool | int | None = 'false'
-    Acrobatics: bool | int | None = 'false'
-    SleightOfHand: bool | int | None = 'false'
-    Stealth: bool | int | None = 'false'
-    Arcana: bool | int | None = 'false'
-    History: bool | int | None = 'false'
-    Investigation: bool | int | None = 'false'
-    Nature: bool | int | None = 'false'
-    Religion: bool | int | None = 'false'
-    AnimalHandling: bool | int | None = 'false'
-    Insight: bool | int | None = 'false'
-    Medicine: bool | int | None = 'false'
-    Perception: bool | int | None = 'false'
-    Survival: bool | int | None = 'false'
-    Deception: bool | int | None = 'false'
-    Intimidation: bool | int | None = 'false'
-    Performance: bool | int | None = 'false'
-    Persuasion: bool | int | None = 'false'
+    Athletics: bool | int | None = "false"
+    Acrobatics: bool | int | None = "false"
+    SleightOfHand: bool | int | None = "false"
+    Stealth: bool | int | None = "false"
+    Arcana: bool | int | None = "false"
+    History: bool | int | None = "false"
+    Investigation: bool | int | None = "false"
+    Nature: bool | int | None = "false"
+    Religion: bool | int | None = "false"
+    AnimalHandling: bool | int | None = "false"
+    Insight: bool | int | None = "false"
+    Medicine: bool | int | None = "false"
+    Perception: bool | int | None = "false"
+    Survival: bool | int | None = "false"
+    Deception: bool | int | None = "false"
+    Intimidation: bool | int | None = "false"
+    Performance: bool | int | None = "false"
+    Persuasion: bool | int | None = "false"
 
 
 class AbilityScores(BaseModel):
-    str: conint(ge=0) = Field(..., description='Strength')
-    dex: conint(ge=0) = Field(..., description='Dexterty')
-    con: conint(ge=0) = Field(..., description='Constitution')
-    int: conint(ge=0) = Field(..., description='Intelligence')
-    wis: conint(ge=0) = Field(..., description='Wisdom')
-    cha: conint(ge=0) = Field(..., description='Charisma')
+    str: conint(ge=0) = Field(..., description="Strength")
+    dex: conint(ge=0) = Field(..., description="Dexterty")
+    con: conint(ge=0) = Field(..., description="Constitution")
+    int: conint(ge=0) = Field(..., description="Intelligence")
+    wis: conint(ge=0) = Field(..., description="Wisdom")
+    cha: conint(ge=0) = Field(..., description="Charisma")
 
 
 class SavingThrows(BaseModel):
-    str: bool | int | None = 'false'
-    dex: bool | int | None = 'false'
-    con: bool | int | None = 'false'
-    int_: bool | int | None = Field('false', alias='int')
-    wis: bool | int | None = 'false'
-    cha: bool | int | None = 'false'
+    str: bool | int | None = "false"
+    dex: bool | int | None = "false"
+    con: bool | int | None = "false"
+    int_: bool | int | None = Field("false", alias="int")
+    wis: bool | int | None = "false"
+    cha: bool | int | None = "false"
 
 
 class ArmorClass(BaseModel):
     value: conint(ge=0) | None = 10
-    description: str | None = 'Unarmored'
+    description: str | None = "Unarmored"
 
 
 class Conditions(BaseModel):
-    Blinded: bool | None = 'false'
-    Charmed: bool | None = 'false'
-    Deafened: bool | None = 'false'
-    Exhaustion: bool | None = 'false'
-    Frightened: bool | None = 'false'
-    Grappled: bool | None = 'false'
-    Incapacitated: bool | None = 'false'
-    Invisible: bool | None = 'false'
-    Necrotic: bool | None = 'false'
-    Paralyzed: bool | None = 'false'
-    Petrified: bool | None = 'false'
-    Poisoned: bool | None = 'false'
-    Prone: bool | None = 'false'
-    Restrained: bool | None = 'false'
-    Stunned: bool | None = 'false'
-    Unconscious: bool | None = 'false'
+    Blinded: bool | None = "false"
+    Charmed: bool | None = "false"
+    Deafened: bool | None = "false"
+    Exhaustion: bool | None = "false"
+    Frightened: bool | None = "false"
+    Grappled: bool | None = "false"
+    Incapacitated: bool | None = "false"
+    Invisible: bool | None = "false"
+    Necrotic: bool | None = "false"
+    Paralyzed: bool | None = "false"
+    Petrified: bool | None = "false"
+    Poisoned: bool | None = "false"
+    Prone: bool | None = "false"
+    Restrained: bool | None = "false"
+    Stunned: bool | None = "false"
+    Unconscious: bool | None = "false"
 
 
 class HitPoints(BaseModel):
@@ -101,7 +101,7 @@ class HitPoints(BaseModel):
 class DD5ECreature(BaseModel):
     name: str
     alignment: str | None = None
-    speed: Speed = Field(..., description='Speed in feet')
+    speed: Speed = Field(..., description="Speed in feet")
     hit_points: HitPoints
     inspiration: str | None = None
     skills: Skills | None = None
@@ -111,7 +111,7 @@ class DD5ECreature(BaseModel):
     senses: senses_schema.JsonSchemaForDD5ESenses | None = None
     description: str | None = None
     armor_class: ArmorClass
-    shield: bool | None = Field('false', description='Toggle if shield is being used.')
+    shield: bool | None = Field("false", description="Toggle if shield is being used.")
     conditions: Conditions | None = None
     condition_immunities: list[conditions_schema.JsonSchemaForDD5EConditions] | None = (
         None

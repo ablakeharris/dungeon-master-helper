@@ -14,6 +14,6 @@ class JsonSchemaForDD5ECreatureAction(BaseModel):
     attack_bonus: int | None = 0
     damage_dice: dice_schema.JsonSchemaForDice | None = None
     damage_bonus: int | None = 0
-    legendary: bool | None = 'false'
-    reaction: bool | None = 'false'
+    legendary: bool | None = "false"
+    reaction: bool | None = "false"
     source: source_schema.Model | None = None
