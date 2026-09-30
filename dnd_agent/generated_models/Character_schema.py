@@ -3,7 +3,9 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field, conint
+from typing import Annotated
+
+from pydantic import BaseModel, Field
 
 from . import (
     Class_schema,
@@ -19,15 +21,17 @@ from .Creature_schema import DD5ECreature
 
 class Player(BaseModel):
     name: str
-    id: str | None = Field(None, description="Wizards' DCI or other identifier.")
+    id: Annotated[
+        str | None, Field(description="Wizards' DCI or other identifier.")
+    ] = None
 
 
 class Details(BaseModel):
-    age: conint(ge=0) | None = None
+    age: Annotated[int | None, Field(ge=0)] = None
     eyes: str | None = None
     hair: str | None = None
     skin: str | None = None
-    weight: conint(ge=0) | None = None
+    weight: Annotated[int | None, Field(ge=0)] = None
     height: str | None = None
     personality: str | None = None
     ideal: str | None = None
@@ -38,11 +42,11 @@ class Details(BaseModel):
 
 
 class Treasure(BaseModel):
-    pp: float | None = Field(0, description='Platimum')
-    ep: float | None = Field(0, description='Electrum')
-    gp: float | None = Field(0, description='Gold')
-    sp: float | None = Field(0, description='Silver')
-    cp: float | None = Field(0, description='Copper')
+    pp: Annotated[float | None, Field(description="Platimum")] = 0
+    ep: Annotated[float | None, Field(description="Electrum")] = 0
+    gp: Annotated[float | None, Field(description="Gold")] = 0
+    sp: Annotated[float | None, Field(description="Silver")] = 0
+    cp: Annotated[float | None, Field(description="Copper")] = 0
 
 
 class Background(BaseModel):
@@ -55,7 +59,7 @@ class Background(BaseModel):
 class DD5ECharacter(DD5ECreature):
     nickname: str | None = None
     player: Player
-    xp: conint(ge=0) | None = 0
+    xp: Annotated[int | None, Field(ge=0)] = 0
     race: Race_schema.DD5ERace
     classes: list[Class_schema.DD5EClass] | None = None
     background: Background | None = None

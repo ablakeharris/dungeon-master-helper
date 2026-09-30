@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from typing import Annotated
+
 from pydantic import AnyUrl, BaseModel, Field
 
 from . import source_schema
@@ -10,11 +12,13 @@ from . import source_schema
 
 class JsonSchemaForImages(BaseModel):
     uri: AnyUrl | None = None
-    alt: str = Field(
-        ...,
-        description='The text to display if image cannot load. `alt` should describe the image generally.',
-    )
-    caption: str | None = Field(
-        None, description='The text to display below the image.'
-    )
+    alt: Annotated[
+        str,
+        Field(
+            description="The text to display if image cannot load. `alt` should describe the image generally."
+        ),
+    ]
+    caption: Annotated[
+        str | None, Field(description="The text to display below the image.")
+    ] = None
     source: source_schema.Model | None = None

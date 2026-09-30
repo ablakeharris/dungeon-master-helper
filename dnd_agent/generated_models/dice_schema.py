@@ -4,8 +4,9 @@
 from __future__ import annotations
 
 from enum import IntEnum
+from typing import Annotated
 
-from pydantic import BaseModel, conint
+from pydantic import BaseModel, Field
 
 
 class Sides(IntEnum):
@@ -20,6 +21,6 @@ class Sides(IntEnum):
 
 
 class JsonSchemaForDice(BaseModel):
-    sides: Sides | None = 4
-    count: conint(ge=1, le=60) | None = 1
+    sides: Sides | None = Sides.integer_4
+    count: Annotated[int | None, Field(ge=1, le=60)] = 1
     mod: int | None = 0

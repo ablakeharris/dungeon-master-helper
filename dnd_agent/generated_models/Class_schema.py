@@ -4,8 +4,9 @@
 from __future__ import annotations
 
 from enum import IntEnum, StrEnum
+from typing import Annotated
 
-from pydantic import BaseModel, conint
+from pydantic import BaseModel, Field
 
 from . import feature_schema, source_schema
 
@@ -22,20 +23,20 @@ class HitDie(IntEnum):
 
 
 class Spellcasting(StrEnum):
-    field_ = ''
-    str = 'str'
-    dex = 'dex'
-    con = 'con'
-    int = 'int'
-    wis = 'wis'
-    cha = 'cha'
+    field_ = ""
+    str = "str"
+    dex = "dex"
+    con = "con"
+    int = "int"
+    wis = "wis"
+    cha = "cha"
 
 
 class DD5EClass(BaseModel):
     name: str
-    level: conint(ge=1)
+    level: Annotated[int, Field(ge=1)]
     subtype: str | None = None
     hit_die: HitDie | None = None
-    spellcasting: Spellcasting | None = ''
+    spellcasting: Spellcasting | None = Spellcasting.field_
     features: list[feature_schema.JsonSchemaForDD5EFeature] | None = None
     source: source_schema.Model | None = None

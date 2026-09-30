@@ -3,22 +3,27 @@
 
 from __future__ import annotations
 
+from typing import Annotated
+
 from pydantic import BaseModel, ConfigDict, Field
 
 
 class JsonSchemaForDD5ESenses(BaseModel):
     model_config = ConfigDict(
-        extra='forbid',
+        extra="forbid",
     )
-    Blindsight: bool | str | None = Field(
-        False, description='`false` or provide Blindsight trait text.'
-    )
-    Darkvision: bool | str | None = Field(
-        False, description='`false` or provide Darkvision trait text.'
-    )
-    Tremorsense: bool | str | None = Field(
-        False, description='`false` or provide Tremorsense trait text.'
-    )
-    Truesight: bool | str | None = Field(
-        False, description='`false` or provide Truesight trait text.'
-    )
+    Blindsight: Annotated[
+        bool | str | None,
+        Field(description="`false` or provide Blindsight trait text."),
+    ] = False
+    Darkvision: Annotated[
+        bool | str | None,
+        Field(description="`false` or provide Darkvision trait text."),
+    ] = False
+    Tremorsense: Annotated[
+        bool | str | None,
+        Field(description="`false` or provide Tremorsense trait text."),
+    ] = False
+    Truesight: Annotated[
+        bool | str | None, Field(description="`false` or provide Truesight trait text.")
+    ] = False

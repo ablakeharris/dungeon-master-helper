@@ -3,28 +3,32 @@
 
 from __future__ import annotations
 
+from typing import Annotated
+
 from pydantic import Field, RootModel
 
 
 class JsonSchemaForDD5EDamageType(RootModel[str]):
-    root: str = Field(
-        'none',
-        description='This schema describes a string value of a Damage Type.',
-        examples=[
-            'none',
-            'Piercing',
-            'Slashing',
-            'Bludgeoning',
-            'Acid',
-            'Cold',
-            'Fire',
-            'Force',
-            'Lightning',
-            'Necrotic',
-            'Poison',
-            'Psychic',
-            'Radiant',
-            'Thunder',
-        ],
-        title='JSON Schema for D&D 5e Damage Type.',
-    )
+    root: Annotated[
+        str,
+        Field(
+            description="This schema describes a string value of a Damage Type.",
+            examples=[
+                "none",
+                "Piercing",
+                "Slashing",
+                "Bludgeoning",
+                "Acid",
+                "Cold",
+                "Fire",
+                "Force",
+                "Lightning",
+                "Necrotic",
+                "Poison",
+                "Psychic",
+                "Radiant",
+                "Thunder",
+            ],
+            title="JSON Schema for D&D 5e Damage Type.",
+        ),
+    ]

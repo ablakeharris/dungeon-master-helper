@@ -3,15 +3,21 @@
 
 from __future__ import annotations
 
+from typing import Annotated
+
 from pydantic import AnyUrl, BaseModel, Field
 
 
 class Model(BaseModel):
-    text: str = Field(
-        ..., examples=['PHB p41', 'Unearthed Arcana: The Artificer Revisited']
-    )
+    text: Annotated[
+        str, Field(examples=["PHB p41", "Unearthed Arcana: The Artificer Revisited"])
+    ]
     note: str | None = None
-    href: AnyUrl | None = Field(
-        None,
-        examples=['https://media.wizards.com/2019/dnd/downloads/UA-Artificer-2019.pdf'],
-    )
+    href: Annotated[
+        AnyUrl | None,
+        Field(
+            examples=[
+                "https://media.wizards.com/2019/dnd/downloads/UA-Artificer-2019.pdf"
+            ]
+        ),
+    ] = None

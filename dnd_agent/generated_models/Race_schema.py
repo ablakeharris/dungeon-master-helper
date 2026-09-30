@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
+from typing import Annotated
 
 from pydantic import BaseModel, Field
 
@@ -11,21 +12,22 @@ from . import action_schema, feature_schema, senses_schema, source_schema
 
 
 class Size(StrEnum):
-    Tiny = 'Tiny'
-    Small = 'Small'
-    Medium = 'Medium'
-    Large = 'Large'
-    Huge = 'Huge'
-    Gargantuan = 'Gargantuan'
+    Tiny = "Tiny"
+    Small = "Small"
+    Medium = "Medium"
+    Large = "Large"
+    Huge = "Huge"
+    Gargantuan = "Gargantuan"
 
 
 class DD5ERace(BaseModel):
-    name: str = Field(..., examples=['Dragonborn'])
-    subtype: str | None = Field(None, examples=['Silver'])
-    size: Size | None = 'Medium'
+    name: Annotated[str, Field(examples=["Dragonborn"])]
+    subtype: Annotated[str | None, Field(examples=["Silver"])] = None
+    size: Size | None = Size.Medium
     traits: list[feature_schema.JsonSchemaForDD5EFeature] | None = None
-    actions: list[action_schema.JsonSchemaForDD5ECreatureAction] | None = Field(
-        None, description='Special actions gained by race/race-subtype.'
-    )
+    actions: Annotated[
+        list[action_schema.JsonSchemaForDD5ECreatureAction] | None,
+        Field(description="Special actions gained by race/race-subtype."),
+    ] = None
     senses: senses_schema.JsonSchemaForDD5ESenses | None = None
     source: source_schema.Model | None = None

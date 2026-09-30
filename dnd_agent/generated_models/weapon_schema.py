@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from . import damage_type_schema, dice_schema
 from .item_schema import JsonSchemaForDD5EPhysicalItem
@@ -11,9 +11,7 @@ from .item_schema import JsonSchemaForDD5EPhysicalItem
 
 class Damage(BaseModel):
     dice: dice_schema.JsonSchemaForDice | None = None
-    type: damage_type_schema.JsonSchemaForDD5EDamageType | None = Field(
-        'none', validate_default=True
-    )
+    type: damage_type_schema.JsonSchemaForDD5EDamageType | None = None
 
 
 class VersatileDamage(BaseModel):
@@ -31,7 +29,7 @@ class ThrowRange(BaseModel):
 
 
 class Properties(BaseModel):
-    Ammunition: str | None = ''
+    Ammunition: str | None = ""
     Finesse: bool | None = False
     Heavy: bool | None = False
     Light: bool | None = False
@@ -44,7 +42,7 @@ class Properties(BaseModel):
 
 
 class JsonSchemaForDD5EWeapon(JsonSchemaForDD5EPhysicalItem):
-    category: str | None = ''
+    category: str | None = ""
     damage: Damage
     versatile_damage: VersatileDamage | None = None
     range: Range | None = None

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
+from typing import Annotated
 
 from pydantic import BaseModel, Field
 
@@ -11,28 +12,30 @@ from . import source_schema, tag_schema
 
 
 class Component(StrEnum):
-    V = 'V'
-    S = 'S'
-    M = 'M'
-    F = 'F'
-    DF = 'DF'
-    XP = 'XP'
+    V = "V"
+    S = "S"
+    M = "M"
+    F = "F"
+    DF = "DF"
+    XP = "XP"
 
 
 class Model(BaseModel):
-    name: str = Field(..., examples=['Acid Splash'])
+    name: Annotated[str, Field(examples=["Acid Splash"])]
     description: str
     higher_level: str | None = None
-    level: str = Field(..., examples=['Cantrip', '1', '2', '3', '4'])
+    level: Annotated[str, Field(examples=["Cantrip", "1", "2", "3", "4"])]
     casting_time: str
-    range_area: str = Field(..., examples=['60ft', 'Self'])
+    range_area: Annotated[str, Field(examples=["60ft", "Self"])]
     components: list[Component]
     material: str | None = None
     ritual: bool | None = False
     concentration: bool | None = False
-    duration: str = Field(..., examples=['Instantaneous'])
-    school: str | None = Field(None, examples=['Conjuring'])
-    attack_save: str | None = Field(None, examples=['DEX Save', 'Ranged'])
-    damage_effect: str | None = Field(None, examples=['Acid'])
-    tags: tag_schema.Model | None = Field(None, examples=['Bard', 'Wizard', 'Warlock'])
+    duration: Annotated[str, Field(examples=["Instantaneous"])]
+    school: Annotated[str | None, Field(examples=["Conjuring"])] = None
+    attack_save: Annotated[str | None, Field(examples=["DEX Save", "Ranged"])] = None
+    damage_effect: Annotated[str | None, Field(examples=["Acid"])] = None
+    tags: Annotated[
+        tag_schema.Model | None, Field(examples=["Bard", "Wizard", "Warlock"])
+    ] = None
     source: source_schema.Model | None = None

@@ -17,10 +17,10 @@ def count_boolean_false_defaults(value: Any) -> int:
         includes_boolean = schema_type == "boolean" or (
             isinstance(schema_type, list) and "boolean" in schema_type
         )
-        current = int(
-            includes_boolean and value.get("default") == "false"
+        current = int(includes_boolean and value.get("default") == "false")
+        return current + sum(
+            count_boolean_false_defaults(item) for item in value.values()
         )
-        return current + sum(count_boolean_false_defaults(item) for item in value.values())
     if isinstance(value, list):
         return sum(count_boolean_false_defaults(item) for item in value)
     return 0

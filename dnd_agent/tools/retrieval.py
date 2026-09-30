@@ -34,10 +34,16 @@ def search_documents(query: str, n_results: int = 5) -> dict:
         }
 
     results = collection.query(query_texts=[query], n_results=n_results)
+    result_documents = results["documents"]
+    if not result_documents:
+        return {"query": query, "results": []}
+
+    result_metadatas = results["metadatas"]
+    metadata_batch = result_metadatas[0] if result_metadatas else []
 
     documents = []
-    for i, doc in enumerate(results["documents"][0]):
-        metadata = results["metadatas"][0][i] if results["metadatas"] else {}
+    for i, doc in enumerate(result_documents[0]):
+        metadata = metadata_batch[i] if i < len(metadata_batch) else {}
         entry = {
             "content": doc,
             "source": metadata.get("source", "unknown"),

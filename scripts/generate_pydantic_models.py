@@ -24,6 +24,9 @@ def main() -> None:
         "--target-python-version",
         "3.13",
         "--disable-timestamp",
+        "--use-annotated",
+        "--deserialize-default-values",
+        "enum",
     ]
     subprocess.run(command, cwd=PROJECT_ROOT, check=True)
     print(

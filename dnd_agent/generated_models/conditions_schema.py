@@ -7,19 +7,19 @@ from enum import StrEnum
 
 
 class JsonSchemaForDD5EConditions(StrEnum):
-    Blinded = 'Blinded'
-    Charmed = 'Charmed'
-    Deafened = 'Deafened'
-    Exhaustion = 'Exhaustion'
-    Frightened = 'Frightened'
-    Grappled = 'Grappled'
-    Incapacitated = 'Incapacitated'
-    Invisible = 'Invisible'
-    Necrotic = 'Necrotic'
-    Paralyzed = 'Paralyzed'
-    Petrified = 'Petrified'
-    Poisoned = 'Poisoned'
-    Prone = 'Prone'
-    Restrained = 'Restrained'
-    Stunned = 'Stunned'
-    Unconscious = 'Unconscious'
+    Blinded = "Blinded"
+    Charmed = "Charmed"
+    Deafened = "Deafened"
+    Exhaustion = "Exhaustion"
+    Frightened = "Frightened"
+    Grappled = "Grappled"
+    Incapacitated = "Incapacitated"
+    Invisible = "Invisible"
+    Necrotic = "Necrotic"
+    Paralyzed = "Paralyzed"
+    Petrified = "Petrified"
+    Poisoned = "Poisoned"
+    Prone = "Prone"
+    Restrained = "Restrained"
+    Stunned = "Stunned"
+    Unconscious = "Unconscious"
