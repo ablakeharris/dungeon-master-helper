@@ -12,9 +12,9 @@ class JsonSchemaForImages(BaseModel):
     uri: AnyUrl | None = None
     alt: str = Field(
         ...,
-        description="The text to display if image cannot load. `alt` should describe the image generally.",
+        description='The text to display if image cannot load. `alt` should describe the image generally.',
     )
     caption: str | None = Field(
-        None, description="The text to display below the image."
+        None, description='The text to display below the image.'
     )
     source: source_schema.Model | None = None

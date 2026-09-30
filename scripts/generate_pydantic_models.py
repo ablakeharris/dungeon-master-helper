@@ -1,7 +1,7 @@
 import subprocess
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIRECTORY = PROJECT_ROOT / "dnd5e_json_schema" / "schemas"
 OUTPUT_DIRECTORY = PROJECT_ROOT / "dnd_agent" / "generated_models"
 

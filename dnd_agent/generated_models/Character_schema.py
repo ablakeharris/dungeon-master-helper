@@ -38,11 +38,11 @@ class Details(BaseModel):
 
 
 class Treasure(BaseModel):
-    pp: float | None = Field(0, description="Platimum")
-    ep: float | None = Field(0, description="Electrum")
-    gp: float | None = Field(0, description="Gold")
-    sp: float | None = Field(0, description="Silver")
-    cp: float | None = Field(0, description="Copper")
+    pp: float | None = Field(0, description='Platimum')
+    ep: float | None = Field(0, description='Electrum')
+    gp: float | None = Field(0, description='Gold')
+    sp: float | None = Field(0, description='Silver')
+    cp: float | None = Field(0, description='Copper')
 
 
 class Background(BaseModel):

@@ -9,9 +9,10 @@ WORKDIR /app
 COPY pyproject.toml uv.lock ./
 RUN uv sync --locked
 
+COPY scripts/ scripts/
 COPY dnd_agent/ dnd_agent/
 
-RUN uv run python dnd_agent/scripts/ingest_docs.py
+RUN uv run python scripts/ingest_docs.py
 
 FROM python:3.14-slim AS deploy
 

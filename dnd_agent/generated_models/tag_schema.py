@@ -7,4 +7,4 @@ from pydantic import Field, RootModel
 
 
 class Model(RootModel[list[str]]):
-    root: list[str] = Field(..., description="This schema describes a generic tag.")
+    root: list[str] = Field(..., description='This schema describes a generic tag.')

@@ -16,7 +16,8 @@ from pathlib import Path
 import chromadb
 from chromadb.errors import NotFoundError
 
-CHROMA_PATH = "dnd_agent/chroma_data"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+CHROMA_PATH = str(PROJECT_ROOT / "dnd_agent" / "chroma_data")
 COLLECTION_NAME = "dnd_documents"
 
 DEFAULT_CHUNK_SIZE = 1000
@@ -184,7 +185,9 @@ def ingest(docs_dir: str, chunk_size: int, chunk_overlap: int) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Ingest D&D documents into ChromaDB")
     parser.add_argument(
-        "--docs-dir", default="dnd_agent/docs", help="Directory containing documents"
+        "--docs-dir",
+        default=str(PROJECT_ROOT / "dnd_agent" / "docs"),
+        help="Directory containing documents",
     )
     parser.add_argument(
         "--chunk-size",

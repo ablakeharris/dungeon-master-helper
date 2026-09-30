@@ -12,5 +12,5 @@ class JsonSchemaForDD5EPhysicalItem(BaseModel):
     name: str
     weight: float | None = 0
     description: str | None = None
-    magic: bool | None = "false"
+    magic: bool | None = False
     source: source_schema.Model | None = None

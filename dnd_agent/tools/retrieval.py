@@ -30,7 +30,7 @@ def search_documents(query: str, n_results: int = 5) -> dict:
     except NotFoundError:
         return {
             "error": "Knowledge base not found. Run the ingestion script first: "
-            "python dnd_agent/scripts/ingest_docs.py"
+            "python scripts/ingest_docs.py"
         }
 
     results = collection.query(query_texts=[query], n_results=n_results)

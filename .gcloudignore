@@ -9,6 +9,6 @@ __pycache__/
 .python-version
 .tool-versions
 README.md
-dnd_agent/scripts/deploy.sh
-dnd_agent/scripts/run-local.sh
+scripts/deploy.sh
+scripts/run-local.sh
 dnd_agent/chroma_data/

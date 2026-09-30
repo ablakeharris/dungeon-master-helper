@@ -22,13 +22,13 @@ class HitDie(IntEnum):
 
 
 class Spellcasting(StrEnum):
-    field_ = ""
-    str = "str"
-    dex = "dex"
-    con = "con"
-    int = "int"
-    wis = "wis"
-    cha = "cha"
+    field_ = ''
+    str = 'str'
+    dex = 'dex'
+    con = 'con'
+    int = 'int'
+    wis = 'wis'
+    cha = 'cha'
 
 
 class DD5EClass(BaseModel):
@@ -36,6 +36,6 @@ class DD5EClass(BaseModel):
     level: conint(ge=1)
     subtype: str | None = None
     hit_die: HitDie | None = None
-    spellcasting: Spellcasting | None = ""
+    spellcasting: Spellcasting | None = ''
     features: list[feature_schema.JsonSchemaForDD5EFeature] | None = None
     source: source_schema.Model | None = None

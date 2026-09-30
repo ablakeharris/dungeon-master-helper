@@ -7,7 +7,7 @@
 # and signs every request with their gcloud identity.
 #
 # Usage:
-#   bash dnd_agent/scripts/deploy.sh
+#   bash scripts/deploy.sh
 set -euo pipefail
 
 PROJECT="${PROJECT:-dnd-waterdeep-492623}"
@@ -15,7 +15,7 @@ REGION="${REGION:-us-central1}"
 SERVICE="${SERVICE:-dnd-waterdeep}"
 
 # Always run from the project root (where Dockerfile lives).
-cd "$(dirname "$0")/../.."
+cd "$(dirname "$0")/.."
 
 gcloud config set project "$PROJECT" >/dev/null
 
@@ -60,5 +60,5 @@ for member in "user:${ACTIVE_ACCOUNT}"; do
 done
 
 echo
-echo "Deployed. To access the UI, run: bash dnd_agent/scripts/run-local.sh"
+echo "Deployed. To access the UI, run: bash scripts/run-local.sh"
 echo "Then open: http://localhost:8088/dev-ui/"

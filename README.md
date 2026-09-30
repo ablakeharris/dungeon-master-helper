@@ -19,10 +19,11 @@ uv sync
 
 ## Generate Pydantic Models
 
-After installing dependencies, generate Pydantic models from all JSON Schemas in `dnd5e_json_schema/schemas/`:
+After installing dependencies, normalize legacy boolean defaults and generate Pydantic models from all JSON Schemas in `dnd5e_json_schema/schemas/`:
 
 ```bash
-uv run python dnd_agent/scripts/generate_pydantic_models.py
+uv run python scripts/fix_boolean_defaults.py
+uv run python scripts/generate_pydantic_models.py
 ```
 
 The generated models are written to `dnd_agent/generated_models/`. Rerun the command after changing the source schemas.
@@ -64,7 +65,7 @@ The app is deployed to Cloud Run with public access disabled (`--no-allow-unauth
 ### 1. Deploy the Cloud Run service
 
 ```bash
-dnd_agent/scripts/deploy.sh
+scripts/deploy.sh
 ```
 
 This enables the needed APIs, grants the build service account access to Vertex AI (for doc ingestion at build time), builds the image, deploys the service with public access disabled, and grants the deploying account `run.invoker` so it can use the proxy.
@@ -72,7 +73,7 @@ This enables the needed APIs, grants the build service account access to Vertex 
 ### 2. Run it locally through the proxy
 
 ```bash
-dnd_agent/scripts/run-local.sh
+scripts/run-local.sh
 ```
 
 This starts `gcloud run services proxy` (installing the `cloud-run-proxy` component on first run) and forwards `localhost:8088` to the service. Open:
