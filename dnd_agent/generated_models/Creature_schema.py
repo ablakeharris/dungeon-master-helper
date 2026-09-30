@@ -28,7 +28,7 @@ class Speed(BaseModel):
 
 class Skills(BaseModel):
     model_config = ConfigDict(
-        extra="forbid",
+        extra='forbid',
     )
     Athletics: bool | int | None = False
     Acrobatics: bool | int | None = False
@@ -51,26 +51,26 @@ class Skills(BaseModel):
 
 
 class AbilityScores(BaseModel):
-    str: Annotated[int, Field(description="Strength", ge=0)]
-    dex: Annotated[int, Field(description="Dexterty", ge=0)]
-    con: Annotated[int, Field(description="Constitution", ge=0)]
-    int_: Annotated[int, Field(alias="int", description="Intelligence", ge=0)]
-    wis: Annotated[int, Field(description="Wisdom", ge=0)]
-    cha: Annotated[int, Field(description="Charisma", ge=0)]
+    str: Annotated[int, Field(description='Strength', ge=0)]
+    dex: Annotated[int, Field(description='Dexterty', ge=0)]
+    con: Annotated[int, Field(description='Constitution', ge=0)]
+    int_: Annotated[int, Field(alias='int', description='Intelligence', ge=0)]
+    wis: Annotated[int, Field(description='Wisdom', ge=0)]
+    cha: Annotated[int, Field(description='Charisma', ge=0)]
 
 
 class SavingThrows(BaseModel):
     str: bool | int | None = False
     dex: bool | int | None = False
     con: bool | int | None = False
-    int_: Annotated[bool | int | None, Field(alias="int")] = False
+    int_: Annotated[bool | int | None, Field(alias='int')] = False
     wis: bool | int | None = False
     cha: bool | int | None = False
 
 
 class ArmorClass(BaseModel):
     value: Annotated[int | None, Field(ge=0)] = 10
-    description: str | None = "Unarmored"
+    description: str | None = 'Unarmored'
 
 
 class Conditions(BaseModel):
@@ -103,7 +103,7 @@ class HitPoints(BaseModel):
 class DD5ECreature(BaseModel):
     name: str
     alignment: str | None = None
-    speed: Annotated[Speed, Field(description="Speed in feet")]
+    speed: Annotated[Speed, Field(description='Speed in feet')]
     hit_points: HitPoints
     inspiration: str | None = None
     skills: Skills | None = None
@@ -114,7 +114,7 @@ class DD5ECreature(BaseModel):
     description: str | None = None
     armor_class: ArmorClass
     shield: Annotated[
-        bool | None, Field(description="Toggle if shield is being used.")
+        bool | None, Field(description='Toggle if shield is being used.')
     ] = False
     conditions: Conditions | None = None
     condition_immunities: list[conditions_schema.JsonSchemaForDD5EConditions] | None = (

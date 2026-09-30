@@ -42,11 +42,11 @@ class Details(BaseModel):
 
 
 class Treasure(BaseModel):
-    pp: Annotated[float | None, Field(description="Platimum")] = 0
-    ep: Annotated[float | None, Field(description="Electrum")] = 0
-    gp: Annotated[float | None, Field(description="Gold")] = 0
-    sp: Annotated[float | None, Field(description="Silver")] = 0
-    cp: Annotated[float | None, Field(description="Copper")] = 0
+    pp: Annotated[float | None, Field(description='Platimum')] = 0
+    ep: Annotated[float | None, Field(description='Electrum')] = 0
+    gp: Annotated[float | None, Field(description='Gold')] = 0
+    sp: Annotated[float | None, Field(description='Silver')] = 0
+    cp: Annotated[float | None, Field(description='Copper')] = 0
 
 
 class Background(BaseModel):

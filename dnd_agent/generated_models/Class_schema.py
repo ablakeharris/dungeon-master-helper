@@ -23,13 +23,13 @@ class HitDie(IntEnum):
 
 
 class Spellcasting(StrEnum):
-    field_ = ""
-    str = "str"
-    dex = "dex"
-    con = "con"
-    int = "int"
-    wis = "wis"
-    cha = "cha"
+    field_ = ''
+    str = 'str'
+    dex = 'dex'
+    con = 'con'
+    int = 'int'
+    wis = 'wis'
+    cha = 'cha'
 
 
 class DD5EClass(BaseModel):

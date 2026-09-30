@@ -10,20 +10,20 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class JsonSchemaForDD5ESenses(BaseModel):
     model_config = ConfigDict(
-        extra="forbid",
+        extra='forbid',
     )
     Blindsight: Annotated[
         bool | str | None,
-        Field(description="`false` or provide Blindsight trait text."),
+        Field(description='`false` or provide Blindsight trait text.'),
     ] = False
     Darkvision: Annotated[
         bool | str | None,
-        Field(description="`false` or provide Darkvision trait text."),
+        Field(description='`false` or provide Darkvision trait text.'),
     ] = False
     Tremorsense: Annotated[
         bool | str | None,
-        Field(description="`false` or provide Tremorsense trait text."),
+        Field(description='`false` or provide Tremorsense trait text.'),
     ] = False
     Truesight: Annotated[
-        bool | str | None, Field(description="`false` or provide Truesight trait text.")
+        bool | str | None, Field(description='`false` or provide Truesight trait text.')
     ] = False

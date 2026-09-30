@@ -22,7 +22,7 @@ uv sync
 After installing dependencies, normalize legacy boolean defaults and generate Pydantic models from all JSON Schemas in `dnd5e_json_schema/schemas/`:
 
 ```bash
-uv run python scripts/fix_boolean_defaults.py
+uv run python scripts/fix_schema_input.py
 uv run python scripts/generate_pydantic_models.py
 ```
 

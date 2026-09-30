@@ -10,5 +10,5 @@ from pydantic import Field, RootModel
 
 class Model(RootModel[list[str]]):
     root: Annotated[
-        list[str], Field(description="This schema describes a generic tag.")
+        list[str], Field(description='This schema describes a generic tag.')
     ]

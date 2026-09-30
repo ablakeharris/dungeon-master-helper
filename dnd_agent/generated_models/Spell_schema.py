@@ -12,30 +12,30 @@ from . import source_schema, tag_schema
 
 
 class Component(StrEnum):
-    V = "V"
-    S = "S"
-    M = "M"
-    F = "F"
-    DF = "DF"
-    XP = "XP"
+    V = 'V'
+    S = 'S'
+    M = 'M'
+    F = 'F'
+    DF = 'DF'
+    XP = 'XP'
 
 
 class Model(BaseModel):
-    name: Annotated[str, Field(examples=["Acid Splash"])]
+    name: Annotated[str, Field(examples=['Acid Splash'])]
     description: str
     higher_level: str | None = None
-    level: Annotated[str, Field(examples=["Cantrip", "1", "2", "3", "4"])]
+    level: Annotated[str, Field(examples=['Cantrip', '1', '2', '3', '4'])]
     casting_time: str
-    range_area: Annotated[str, Field(examples=["60ft", "Self"])]
+    range_area: Annotated[str, Field(examples=['60ft', 'Self'])]
     components: list[Component]
     material: str | None = None
     ritual: bool | None = False
     concentration: bool | None = False
-    duration: Annotated[str, Field(examples=["Instantaneous"])]
-    school: Annotated[str | None, Field(examples=["Conjuring"])] = None
-    attack_save: Annotated[str | None, Field(examples=["DEX Save", "Ranged"])] = None
-    damage_effect: Annotated[str | None, Field(examples=["Acid"])] = None
+    duration: Annotated[str, Field(examples=['Instantaneous'])]
+    school: Annotated[str | None, Field(examples=['Conjuring'])] = None
+    attack_save: Annotated[str | None, Field(examples=['DEX Save', 'Ranged'])] = None
+    damage_effect: Annotated[str | None, Field(examples=['Acid'])] = None
     tags: Annotated[
-        tag_schema.Model | None, Field(examples=["Bard", "Wizard", "Warlock"])
+        tag_schema.Model | None, Field(examples=['Bard', 'Wizard', 'Warlock'])
     ] = None
     source: source_schema.Model | None = None

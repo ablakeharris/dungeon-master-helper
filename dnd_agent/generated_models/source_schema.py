@@ -10,14 +10,14 @@ from pydantic import AnyUrl, BaseModel, Field
 
 class Model(BaseModel):
     text: Annotated[
-        str, Field(examples=["PHB p41", "Unearthed Arcana: The Artificer Revisited"])
+        str, Field(examples=['PHB p41', 'Unearthed Arcana: The Artificer Revisited'])
     ]
     note: str | None = None
     href: Annotated[
         AnyUrl | None,
         Field(
             examples=[
-                "https://media.wizards.com/2019/dnd/downloads/UA-Artificer-2019.pdf"
+                'https://media.wizards.com/2019/dnd/downloads/UA-Artificer-2019.pdf'
             ]
         ),
     ] = None

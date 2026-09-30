@@ -5,6 +5,7 @@ from typing import Any
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIRECTORY = PROJECT_ROOT / "dnd5e_json_schema" / "schemas"
+DAMAGE_TYPE_SCHEMA = SCHEMA_DIRECTORY / "damage_type.schema.json"
 BOOLEAN_FALSE_DEFAULT = re.compile(
     r'("type"\s*:\s*(?:"boolean"|\[[^\]]*"boolean"[^\]]*\])'
     r'\s*,\s*"default"\s*:\s*)"false"'
@@ -24,6 +25,21 @@ def count_boolean_false_defaults(value: Any) -> int:
     if isinstance(value, list):
         return sum(count_boolean_false_defaults(item) for item in value)
     return 0
+
+
+def remove_damage_type_default() -> None:
+    source = DAMAGE_TYPE_SCHEMA.read_text(encoding="utf-8")
+    schema = json.loads(source)
+    if "default" not in schema:
+        return
+    if schema["default"] not in ("none", ""):
+        raise ValueError(f"Unexpected damage type default: {schema['default']!r}")
+
+    del schema["default"]
+    DAMAGE_TYPE_SCHEMA.write_text(
+        json.dumps(schema, indent=4) + "\n",
+        encoding="utf-8",
+    )
 
 
 def main() -> None:
@@ -48,6 +64,7 @@ def main() -> None:
 
     total = sum(replacement_count for _, _, replacement_count in changes)
     print(f"Updated {total} boolean default(s) across {len(changes)} schema file(s).")
+    remove_damage_type_default()
 
 
 if __name__ == "__main__":

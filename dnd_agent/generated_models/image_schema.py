@@ -15,10 +15,10 @@ class JsonSchemaForImages(BaseModel):
     alt: Annotated[
         str,
         Field(
-            description="The text to display if image cannot load. `alt` should describe the image generally."
+            description='The text to display if image cannot load. `alt` should describe the image generally.'
         ),
     ]
     caption: Annotated[
-        str | None, Field(description="The text to display below the image.")
+        str | None, Field(description='The text to display below the image.')
     ] = None
     source: source_schema.Model | None = None
