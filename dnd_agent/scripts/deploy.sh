@@ -25,9 +25,9 @@ gcloud services enable \
   aiplatform.googleapis.com \
   --project="$PROJECT"
 
-# The Compute Engine default SA runs the Cloud Build. It needs:
+# The Compute Engine default SA is used by Cloud Build and Cloud Run. It needs:
 #   - cloudbuild.builds.builder  – upload source, push image, write logs
-#   - aiplatform.user            – ingest_docs.py calls Vertex AI embeddings
+#   - aiplatform.user            – the deployed agent calls Vertex AI
 PROJECT_NUMBER="$(gcloud projects describe "$PROJECT" --format='value(projectNumber)')"
 BUILD_SA="${PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
 for role in roles/cloudbuild.builds.builder roles/aiplatform.user; do
