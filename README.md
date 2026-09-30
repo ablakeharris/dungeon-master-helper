@@ -39,7 +39,19 @@ This chunks the documents and stores embeddings in a local ChromaDB database (`c
 
 ## Run Locally
 
-Launch the ADK web UI:
+Authenticate ADC for your user using gcloud CLI:
+
+```bash
+gcloud auth application-default login
+```
+
+That command won't work if using a headless environment (like WSL). In that case, run:
+
+```bash
+gcloud auth application-default login
+```
+
+Run the application locally:
 
 ```bash
 uv run adk web .

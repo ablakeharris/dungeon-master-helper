@@ -25,4 +25,4 @@ RUN uv sync --locked --no-dev
 COPY --from=build /app/dnd_agent/ ./dnd_agent/
 COPY --from=build /root/.cache/chroma/ /root/.cache/chroma/
 
-CMD exec .venv/bin/adk web --host 0.0.0.0 --port ${PORT:-8080} .
+CMD exec .venv/bin/adk web --host 0.0.0.0 --port ${PORT:-8080} --allow_origins=http://localhost:8088,http://127.0.0.1:8088 .
