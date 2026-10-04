@@ -138,7 +138,7 @@ def _canonical_character(draft: CharacterOutputSchema) -> DD5ECharacter:
                 "Climb": 0,
                 "Fly": 0,
                 "Hover": False,
-                "Swim": 0,
+                "Swim": draft.speed,
             },
             "hit_points": {
                 "max": draft.hit_points,
@@ -171,21 +171,18 @@ def _canonical_character(draft: CharacterOutputSchema) -> DD5ECharacter:
 
 def _return_canonical_character(
     callback_context: CallbackContext,
-) -> types.Content:
+):
     draft = CharacterOutputSchema.model_validate(
         callback_context.state["character_draft"]
     )
     character = _canonical_character(draft)
-    return types.Content(
-        role="model",
-        parts=[
-            types.Part(
-                text=character.model_dump_json(
-                    by_alias=True, exclude_none=True, indent=2
-                )
-            )
-        ],
+    
+    # Overwrite the node's output value directly so the parent agent receives
+    # the correct DD5ECharacter schema instead of the CharacterOutputSchema draft.
+    callback_context._output_value = character.model_dump(
+        by_alias=True, exclude_none=True
     )
+
 
 
 character_creator_agent = Agent(
