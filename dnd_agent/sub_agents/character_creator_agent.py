@@ -190,6 +190,7 @@ def _return_canonical_character(
 
 character_creator_agent = Agent(
     model="gemini-2.5-flash",
+    disallow_transfer_to_parent=True,
     name="character_creator",
     description="D&D 5e character creation assistant",
     instruction="""Generate a JSON representation of a D&D 5e character based on the user's prompt.
