@@ -94,6 +94,15 @@ gcloud run services add-iam-policy-binding dnd-waterdeep \
 
 They need the `gcloud` CLI and access to the project. The service is never exposed publicly.
 
+### Tearing it down
+
+```bash
+scripts/teardown.sh                 # asks for confirmation; --yes to skip
+scripts/teardown.sh --disable-apis  # also disable the APIs deploy.sh enabled
+```
+
+This deletes the Cloud Run service, its image in the auto-created `cloud-run-source-deploy` Artifact Registry repo, the uploaded source archives, and the IAM roles `deploy.sh` granted. Shared containers (the repo and source buckets) are only deleted once they are empty.
+
 ### Environment variables
 
 The scripts default to:

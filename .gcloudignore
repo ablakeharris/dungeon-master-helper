@@ -11,4 +11,5 @@ __pycache__/
 README.md
 scripts/deploy.sh
 scripts/run-local.sh
+scripts/teardown.sh
 dnd_agent/chroma_data/
